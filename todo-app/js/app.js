@@ -3,6 +3,13 @@ window.onload = function () {
   var txtArea = document.getElementById('textarea');
   var checkBoxAll = document.getElementById('checkbox-all');
 
+  // new ??
+  //  var completeAll = document.getElementById('complete-all');
+  var filterShowAll = document.getElementById('show-all');
+  var filterShowCompleted = document.getElementById('show-completed');
+  var filterShowRemoved = document.getElementById('show-removed');
+
+
   // ??? enterkey
   txtArea.addEventListener('keyup', function (event) {
     // Number 13 is the "Enter" key on the keyboard
@@ -36,41 +43,64 @@ window.onload = function () {
       newTask.append(icon);
       txtArea.value = '';
       // register events here:
+    }
+    // };
+    // complete task
+    check.onclick = function () {
+      label.classList.toggle('completed');
+    };
 
-      // complete task
-      check.onclick = function () {
-        label.classList.toggle('completed');
-      };
+    icon.onclick = function () {
+      //console.log('delete');
+      newTask.classList.add('hide');
+    };
 
-      checkBoxAll.onclick = function () {
-        // todo
-        var tasks = document.querySelectorAll('.new');
-          for (var i = 0; i < tasks.length; i++) {
-            // todo: лучше найти дочерний label по селектору&&&
-            tasks[i].childNodes[0].classList.toggle('completed');
-            tasks[i].childNodes[0].childNodes[0].checked = true;
-          }
-      };
-
-      // TODO: delete task event
-      icon.onclick = function () {
-        //console.log('delete');
-        newTask.classList.add('hide');
-      };
+  };
+  checkBoxAll.onclick = function () {
+    // todo
+    var tasks = document.querySelectorAll('.new');
+    for (var i = 0; i < tasks.length; i++) {
+      // todo: лучше найти дочерний label по селектору&&&
+      if (checkBoxAll.checked === true) {
+        tasks[i].childNodes[0].classList.remove('completed');
+        tasks[i].childNodes[0].classList.toggle('completed');
+        tasks[i].childNodes[0].childNodes[0].checked = true;
+      } else {
+        tasks[i].childNodes[0].classList.remove('completed');
+        tasks[i].childNodes[0].childNodes[0].checked = false;
+      }
     }
   };
 
+  // TODO: delete task event
 
-  // ?????
+  // ??? here??
+  filterShowCompleted.onclick = function () {
+    console.log('test showCompleted');
+  };
+
+  filterShowRemoved.onclick = function () {
+    console.log('test showRemove');
+  };
+
+  filterShowAll.onclick = function () {
+    console.log('test showAll');
+  };
+
+
+
+
+};
 /*
+  // ?????
   // TODO: complete all handler here
     var completeAll = document.getElementById('complete-all');
     completeAll.onclick = function () {
       console.log('complete all');
     };
 */
+/*
   // TODO: filter tasks
-  /*
     var filterShowAll = document.getElementById('filter-show-all');
     filterShowAll.onclick = function () {
       console.log('show all');
@@ -86,4 +116,4 @@ window.onload = function () {
       console.log('show removed');
     };
   */
-}
+//}
